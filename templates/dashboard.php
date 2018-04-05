@@ -163,10 +163,7 @@
                         <td>
                             <?php
 
-                            $post_type = $post->post_type;
-
-                            $taxonomies = get_object_taxonomies( $post_type, 'objects' );
-
+                            $taxonomies = get_object_taxonomies( get_post_type(), 'objects' );
                             $post_tax_terms = array();
 
                             foreach ( $taxonomies as $taxonomy_slug => $taxonomy ) {
@@ -183,7 +180,8 @@
                                     }
                                 }
                             }
-                            echo implode( ',', $post_tax_terms );
+                            echo apply_filters( 'wpuf_dashboard_post_taxonomy', implode( ',', $post_tax_terms ) );
+
                             ?>
                         </td>
                         <?php }
